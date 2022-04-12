@@ -12,3 +12,4 @@ export class Usercontroller {
     return await this.userService.createUser(createUserDto);
   }
 }
+ 

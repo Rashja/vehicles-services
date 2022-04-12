@@ -9,11 +9,16 @@ export class UserRepository {
   constructor(@InjectModel('User') private readonly userModel: Model<IUser>) {}
 
   async createUser(createUserDto: createUserDto): Promise<IUser> {
-    return await {
-      id:'48726347623876',
-      name:'ramtin',
-      email:'ramtin@gmail.com',
-      password:'pass'
+    try {
+      const newUser = new this.userModel({
+        ...createUserDto,
+      });
+
+      const result = await newUser.save();
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

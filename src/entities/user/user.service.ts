@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { IUser } from '../user/user.model';
 import { createUserDto } from './dto/create-user.dto';
-import { IUser } from './user.model';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -9,8 +9,8 @@ export class UserService {
 
   async createUser(createUserDto: createUserDto): Promise<IUser> {
     return new Promise((resolve, reject) => {
-      reject('something is wrong')
-      resolve(this.userRepository.createUser(createUserDto))
+        const result=this.userRepository.createUser(createUserDto)
+        resolve(result);
     });
   }
 }
