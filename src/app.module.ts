@@ -1,8 +1,9 @@
-import {  Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserModule } from './entities/user/user.module';
 import { Database } from './database/database';
 import { ConfigModule } from '@nestjs/config';
-
+import { GetUserMiddleware } from './middlewares/get-user.middleware';
+import { Usercontroller } from './entities/user/user.controller';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -10,4 +11,8 @@ import { ConfigModule } from '@nestjs/config';
     Database.root()
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule{
+    configure(consumer: MiddlewareConsumer) {
+    consumer.apply(GetUserMiddleware).forRoutes(Usercontroller)
+  }
+}
