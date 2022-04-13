@@ -8,13 +8,29 @@ import { IUser } from './user.model';
 export class UserRepository {
   constructor(@InjectModel('User') private readonly userModel: Model<IUser>) {}
 
+  async getAllUsers(): Promise<IUser[]> {
+    try {
+      return this.userModel.find({}).exec();
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  async findUserByEmail(email: string): Promise<IUser> {
+    try {
+      return this.userModel.findOne({ email });
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
   async createUser(createUserDto: createUserDto): Promise<IUser> {
     try {
       const newUser = new this.userModel({
         ...createUserDto,
       });
 
-      const result = await newUser.save();
+      const result = newUser.save();
 
       return result;
     } catch (error) {

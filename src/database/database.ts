@@ -1,7 +1,7 @@
 import { MongooseModule } from '@nestjs/mongoose';
 
 export class Database {
-  static features(name:string,schema) {
+  static features<T>(name:string,schema:T) {
     return {
       User: MongooseModule.forFeature([{ name, schema }]),
     }[name];
