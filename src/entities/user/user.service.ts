@@ -3,13 +3,16 @@ import { IUser } from '../user/user.model';
 import { createUserDto } from './dto/create-user.dto';
 import { UserRepository } from './user.repository';
 import * as password from 'password-hash-and-salt';
+import { UserResponse } from '../user/user.model';
 
 @Injectable()
 export class UserService {
+  userResponse: UserResponse = new UserResponse();
   constructor(private readonly userRepository: UserRepository) {}
 
   async getAllUsers() {
-    return this.userRepository.getAllUsers();
+    const allUsers = await this.userRepository.getAllUsers();
+    return allUsers.map((user) => this.userResponse.getUser(user));
   }
 
   async findUserByEmail(email: string): Promise<IUser> {
@@ -42,7 +45,8 @@ export class UserService {
         const result = this.userRepository.createUser({
           ...createUserDto,
           password: hash,
-        });
+        }).then(response => this.userResponse.getUser(response));
+        
         resolve(result);
       });
     });
