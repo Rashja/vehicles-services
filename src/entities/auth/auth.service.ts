@@ -11,5 +11,26 @@ export class AuthService {
 
   async login(loginDto: LoginDto) {
 
+    const user = await this.userService.findUserByEmail(loginDto.email);
+
+    if (!user) {
+      throw new UnauthorizedException(`${loginDto.email} does not exist`);
+    }
+    
+    return new Promise((resolve, rejects) => {
+      password(loginDto.password).verifyAgainst(
+        user.password,
+        (err, verified) => {
+          if (!verified) {
+            rejects(new UnauthorizedException());
+          }
+          const authJwtToken = jwt.sign(
+            { email: loginDto.email },
+            process.env.DATABASE_JWT_SECRET,
+          );
+          resolve({ authJwtToken });
+        },
+      );
+    });
   }
 }
