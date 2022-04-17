@@ -5,3 +5,7 @@ export enum UserRoutes {
 export enum AuthRoutes {
     LOGIN='login'
 }
+
+export enum VehicleRoutes {
+    VEHICLE='vehicle'
+}
