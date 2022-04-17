@@ -5,12 +5,14 @@ import { ConfigModule } from '@nestjs/config';
 import { GetUserMiddleware } from './middlewares/get-user.middleware';
 import { Usercontroller } from './entities/user/user.controller';
 import { AuthModule } from './entities/auth/auth.module';
+import { VehicleModule } from './entities/vehicle/vehicle.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     UserModule,
     AuthModule,
+    VehicleModule,
     Database.root()
   ],
 })
