@@ -19,7 +19,8 @@ export class UserService {
     let user;
 
     try {
-      user = await this.userRepository.findUserByEmail(email);
+      const rowUser = await this.userRepository.findUserByEmail(email);
+      user = this.userResponse.getUser(rowUser);
     } catch (error) {
       throw new NotFoundException(`Not found user by email "${email}"`);
     }
@@ -42,11 +43,13 @@ export class UserService {
       password(createUserDto.password).hash((error, hash) => {
         if (error) reject('something went wrong');
 
-        const result = this.userRepository.createUser({
-          ...createUserDto,
-          password: hash,
-        }).then(response => this.userResponse.getUser(response));
-        
+        const result = this.userRepository
+          .createUser({
+            ...createUserDto,
+            password: hash,
+          })
+          .then((response) => this.userResponse.getUser(response));
+
         resolve(result);
       });
     });
