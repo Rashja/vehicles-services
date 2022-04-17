@@ -7,5 +7,6 @@ export enum AuthRoutes {
 }
 
 export enum VehicleRoutes {
-    VEHICLE='vehicle'
+    VEHICLE='vehicle',
+    NUMBERPLATE='/:numberplate'
 }
