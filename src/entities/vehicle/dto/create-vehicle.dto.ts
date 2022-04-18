@@ -9,4 +9,7 @@ export class createVehicleDto {
 
     @IsNotEmpty()
     numberplate:string;
+
+    @IsNotEmpty()
+    owner:string;
 }

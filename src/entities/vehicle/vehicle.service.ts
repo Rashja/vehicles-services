@@ -45,7 +45,11 @@ export class VehicleService {
         `This vehicle: ${createVehicleDto.numberplate} does already exist.`,
       );
     }
-    const rowVehicle=await this.vehicleRepository.createVehicle(createVehicleDto);
-    return this.vehicleResponse.getVehicle(rowVehicle)
+    try {
+      const rowVehicle=await this.vehicleRepository.createVehicle(createVehicleDto);
+      return this.vehicleResponse.getVehicle(rowVehicle)  
+    } catch (error) {
+      throw new NotFoundException(`Invalid ID : ${createVehicleDto.owner}`)
+    }
   }
 }

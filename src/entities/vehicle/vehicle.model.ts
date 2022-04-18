@@ -4,22 +4,25 @@ export const VehicleSchema = new mongoose.Schema({
   name: { type: String, required: true },
   color: { type: String, required: true },
   numberplate: { type: String, required: true },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
-export interface IVehicle  {
-  uuid: string;
+export interface IVehicle {
+  vehicleId: string;
   name: string;
-  numberplate:string;
-  color:string;
+  numberplate: string;
+  color: string;
+  owner:string;
 }
 
 export class VehicleResponse {
   private _name: string;
   private _color: string;
   private _numberplate: string;
-  private _uuid: string;
+  private _vehicleId: string;
+  private _owner:string;
 
-  constructor(_vehicle?:any) {
+  constructor(_vehicle?: any) {
     this.getVehicle(_vehicle);
   }
 
@@ -29,6 +32,14 @@ export class VehicleResponse {
 
   private set name(name: string) {
     this._name = name;
+  }
+
+  private get owner() {
+    return this._owner;
+  }
+
+  private set owner(owner: string) {
+    this._owner = owner;
   }
 
   private get numberplate() {
@@ -46,24 +57,26 @@ export class VehicleResponse {
     this._color = color;
   }
 
-  private get uuid() {
-    return this._uuid;
+  private get vehicleId() {
+    return this._vehicleId;
   }
 
-  private set uuid(uuid: string) {
-    this._uuid = uuid;
+  private set vehicleId(vehicleId: string) {
+    this._vehicleId = vehicleId;
   }
 
-  public getVehicle(_vehicle):IVehicle {
+  public getVehicle(_vehicle): IVehicle {
     this.numberplate = _vehicle?.numberplate;
     this.name = _vehicle?.name;
     this.color = _vehicle?.color;
-    this.uuid = _vehicle?._id;
+    this.vehicleId = _vehicle?._id;
+    this._owner = _vehicle?.owner
     return {
       color: this.color,
       name: this.name,
       numberplate: this.numberplate,
-      uuid: this.uuid,
+      vehicleId: this.vehicleId,
+      owner:this.owner
     };
   }
 }
