@@ -17,7 +17,7 @@ export interface IVehicle {
   alternativeDrivers?: string[];
 }
 
-export class VehicleResponse{
+export class VehicleResponse {
   private _name: string;
   private _color: string;
   private _numberplate: string;
@@ -26,7 +26,7 @@ export class VehicleResponse{
   private _alternativeDrivers: string[];
 
   constructor(_vehicle?: any) {
-    this.getVehicle(_vehicle)
+    this.getVehicle(_vehicle);
   }
 
   private get alternativeDrivers() {
@@ -76,20 +76,22 @@ export class VehicleResponse{
     this._vehicleId = vehicleId;
   }
 
-  public getVehicle(_vehicle){
+  public getVehicle(_vehicle) {
     this.numberplate = _vehicle?.numberplate;
     this.name = _vehicle?.name;
     this.color = _vehicle?.color;
     this.vehicleId = _vehicle?._id;
     this.owner = _vehicle?.owner;
-    this.alternativeDrivers=_vehicle?.alternativeDrivers
+    this.alternativeDrivers = _vehicle?.alternativeDrivers;
     return {
       color: this.color,
       name: this.name,
       numberplate: this.numberplate,
       vehicleId: this.vehicleId,
       owner: this.owner,
-      alternativeDrivers:this.alternativeDrivers,
+      ...(this.alternativeDrivers?.length > 0
+        ? { alternativeDrivers: this.alternativeDrivers }
+        : {}),
     };
   }
 }

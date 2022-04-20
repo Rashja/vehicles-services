@@ -36,7 +36,7 @@ export class VehicleRepository {
       );
       vehicle.alternativeDrivers = [
           ...vehicle.alternativeDrivers,
-          ...alternativeDrivers.alternativeDiversId,
+          alternativeDrivers.alternativeDiversId,
       ];
       vehicle.save();
       return vehicle;
