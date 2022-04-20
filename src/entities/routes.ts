@@ -1,12 +1,13 @@
 export enum UserRoutes {
-    USER='user'
+  USER = 'user',
 }
 
 export enum AuthRoutes {
-    LOGIN='login'
+  LOGIN = 'login',
 }
 
 export enum VehicleRoutes {
-    VEHICLE='vehicle',
-    NUMBERPLATE='/:numberplate'
+  VEHICLE = 'vehicle',
+  NUMBERPLATE = '/:numberplate',
+  ASSIGN_ALTERNATIVE_DRIVERS = '/assignAlternativeDrivers',
 }

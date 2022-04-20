@@ -5,6 +5,7 @@ export const VehicleSchema = new mongoose.Schema({
   color: { type: String, required: true },
   numberplate: { type: String, required: true },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  alternativeDrivers: { type: [String], required: false },
 });
 
 export interface IVehicle {
@@ -12,18 +13,28 @@ export interface IVehicle {
   name: string;
   numberplate: string;
   color: string;
-  owner:string;
+  owner: string;
+  alternativeDrivers?: string[];
 }
 
-export class VehicleResponse {
+export class VehicleResponse{
   private _name: string;
   private _color: string;
   private _numberplate: string;
   private _vehicleId: string;
-  private _owner:string;
+  private _owner: string;
+  private _alternativeDrivers: string[];
 
   constructor(_vehicle?: any) {
-    this.getVehicle(_vehicle);
+    this.getVehicle(_vehicle)
+  }
+
+  private get alternativeDrivers() {
+    return this._alternativeDrivers;
+  }
+
+  private set alternativeDrivers(alternativeDrivers: string[]) {
+    this._alternativeDrivers = alternativeDrivers;
   }
 
   private get name() {
@@ -65,18 +76,20 @@ export class VehicleResponse {
     this._vehicleId = vehicleId;
   }
 
-  public getVehicle(_vehicle): IVehicle {
+  public getVehicle(_vehicle){
     this.numberplate = _vehicle?.numberplate;
     this.name = _vehicle?.name;
     this.color = _vehicle?.color;
     this.vehicleId = _vehicle?._id;
-    this._owner = _vehicle?.owner
+    this.owner = _vehicle?.owner;
+    this.alternativeDrivers=_vehicle?.alternativeDrivers
     return {
       color: this.color,
       name: this.name,
       numberplate: this.numberplate,
       vehicleId: this.vehicleId,
-      owner:this.owner
+      owner: this.owner,
+      alternativeDrivers:this.alternativeDrivers,
     };
   }
 }
