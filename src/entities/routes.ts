@@ -11,3 +11,7 @@ export enum VehicleRoutes {
   NUMBERPLATE = '/:numberplate',
   ASSIGN_ALTERNATIVE_DRIVERS = '/assignAlternativeDrivers',
 }
+
+export enum AlternativeDriverRoutes {
+  ALTERNATIVE_DRIVER = 'alternativeDriver',
+}
