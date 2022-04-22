@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { IUser } from '../user/user.model';
-import { createUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { UserRepository } from './user.repository';
 import * as password from 'password-hash-and-salt';
 import { UserResponse } from '../user/user.model';
@@ -30,7 +30,7 @@ export class UserService {
     return user;
   }
 
-  async createUser(createUserDto: createUserDto): Promise<IUser> {
+  async createUser(createUserDto: CreateUserDto): Promise<IUser> {
     const email = await this.userRepository.findUserByEmail(
       createUserDto.email,
     );

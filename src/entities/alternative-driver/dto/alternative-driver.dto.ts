@@ -1,13 +1,15 @@
 import { IsEmail,IsNotEmpty} from "class-validator";
 
-export class CreateUserDto {
+export class CreateAlternativeDriverDto {
     @IsNotEmpty()
     name:string;
 
     @IsNotEmpty()
-    @IsEmail()
-    email:string;
+    lastname:string;
 
     @IsNotEmpty()
-    password:string;
+    age:number;
+
+    @IsNotEmpty()
+    license:string;
 }
