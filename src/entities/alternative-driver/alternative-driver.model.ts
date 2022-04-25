@@ -71,7 +71,7 @@ export class AlternativeDriverResponse {
     this.name = _alternativeDriver?.name;
     this.lastname = _alternativeDriver?.lastname;
     this.uuid = _alternativeDriver?._id;
-    this.age = _alternativeDriver?._age;
+    this.age = _alternativeDriver?.age;
     return {
       license: this.license,
       name: this.name,

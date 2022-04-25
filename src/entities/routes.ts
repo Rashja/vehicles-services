@@ -14,4 +14,5 @@ export enum VehicleRoutes {
 
 export enum AlternativeDriverRoutes {
   ALTERNATIVE_DRIVER = 'alternativeDriver',
+  LICENSE='/:license'
 }

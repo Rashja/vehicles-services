@@ -27,7 +27,9 @@ export class VehicleService {
       const rowVehicle = await this.vehicleRepository.findVehicleByNumberplate(
         numberplate,
       );
-      vehicle = this.vehicleResponse.getVehicle(rowVehicle);
+      if(rowVehicle){
+        vehicle = this.vehicleResponse.getVehicle(rowVehicle);
+      }
     } catch (error) {
       throw new NotFoundException(
         `Not found vehicle by numberplate "${numberplate}"`,

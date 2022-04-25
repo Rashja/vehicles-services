@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import { IAlternativeDriver } from './alternative-driver.model';
 import { CreateAlternativeDriverDto } from './dto/alternative-driver.dto';
 import { AlternativeDriverRoutes } from '../routes';
@@ -11,14 +11,19 @@ export class AlternativeDrivercontroller {
   ) {}
 
   @Get()
-  async getAllAlternativeDrivers() {
-    return await this.alternativeDriverService.getAllAlternativeDrivers;
+  async getAllAlternativeDrivers(): Promise<IAlternativeDriver[]> {
+    return await this.alternativeDriverService.getAllAlternativeDrivers();
+  }
+
+  @Get(AlternativeDriverRoutes.LICENSE)
+  async findDriverByLicense(@Param('license') license: string) {
+    return await this.alternativeDriverService.findDriverByLicense(license);
   }
 
   @Post()
   async createAlternativeDriver(
     @Body() createAlternativeDriverDto: CreateAlternativeDriverDto,
-  ) {
+  ): Promise<IAlternativeDriver> {
     return await this.alternativeDriverService.createAlternativeDriver(
       createAlternativeDriverDto,
     );

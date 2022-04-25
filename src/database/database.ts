@@ -3,8 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 export class Database {
   static features<T>(name:string,schema:T) {
     return {
-      User: MongooseModule.forFeature([{ name, schema }]),
-      vehicle: MongooseModule.forFeature([{ name, schema }]),
+      [name]: MongooseModule.forFeature([{ name, schema }]),
     }[name];
   }
 
