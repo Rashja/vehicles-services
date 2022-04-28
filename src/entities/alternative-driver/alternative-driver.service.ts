@@ -13,12 +13,16 @@ export class AlternativeDriverService {
     private readonly alternativeDriverRepository: AlternativeDriverRepository,
   ) {}
 
-  async getAllAlternativeDrivers(): Promise<IAlternativeDriver[]> {
-    const allDrivers =
-      await this.alternativeDriverRepository.getAllAlternativeDrivers();
-    return allDrivers.map((driver) =>
-      this.alternativeDriverResponse.getAlternativeDriver(driver),
-    );
+  async getAllAlternativeDrivers(driversId:string[]): Promise<IAlternativeDriver[]> {
+    try {
+      const allDrivers =
+        await this.alternativeDriverRepository.getAllAlternativeDrivers(driversId);
+      return allDrivers.map((driver) =>
+        this.alternativeDriverResponse.getAlternativeDriver(driver),
+      );    
+    } catch (error) {
+      throw new NotFoundException(`Ivalid IDs`)
+    }
   }
 
   async findDriverByLicense(license: string): Promise<IAlternativeDriver> {

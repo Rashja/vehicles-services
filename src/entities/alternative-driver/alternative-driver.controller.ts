@@ -10,9 +10,11 @@ export class AlternativeDrivercontroller {
     private readonly alternativeDriverService: AlternativeDriverService,
   ) {}
 
-  @Get()
-  async getAllAlternativeDrivers(): Promise<IAlternativeDriver[]> {
-    return await this.alternativeDriverService.getAllAlternativeDrivers();
+  @Post()
+  async getAllAlternativeDrivers(
+    @Body('driversId') driversId: string[],
+  ): Promise<IAlternativeDriver[]> {
+    return await this.alternativeDriverService.getAllAlternativeDrivers(driversId);
   }
 
   @Get(AlternativeDriverRoutes.LICENSE)

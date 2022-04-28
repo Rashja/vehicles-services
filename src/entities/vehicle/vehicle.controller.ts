@@ -18,6 +18,11 @@ export class VehicleController {
     return await this.vehicleService.findVehicleByNumberplate(numberplate);
   }
 
+  @Get(VehicleRoutes.VEHICLE_ALTERNATIVE_DRIVERS)
+  async findVehicleAlternativeDrivers(@Param('numberplate') numberplate: string) {
+    return await this.vehicleService.findVehicleAlternativeDrivers(numberplate);
+  }
+
   @Post(VehicleRoutes.ASSIGN_ALTERNATIVE_DRIVERS)
   async assignAlternativeDriver(@Body() alternativeDrivers:assignAlternativeDriverDto) {
     return await this.vehicleService.assignAlternativeDriver(alternativeDrivers);

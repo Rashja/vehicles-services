@@ -11,9 +11,9 @@ export class AlternativeDriverRepository {
     private readonly alternativeDriverModel: Model<IAlternativeDriver>,
   ) {}
 
-  async getAllAlternativeDrivers(): Promise<IAlternativeDriver[]> {
+  async getAllAlternativeDrivers(ids:string[]): Promise<IAlternativeDriver[]> {
     try {
-      return this.alternativeDriverModel.find({}).exec();
+      return this.alternativeDriverModel.find((ids ? { _id : { $in : ids } } : {})).exec();
     } catch (error) {
       throw new Error(error);
     }

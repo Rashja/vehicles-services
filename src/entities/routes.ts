@@ -8,8 +8,9 @@ export enum AuthRoutes {
 
 export enum VehicleRoutes {
   VEHICLE = 'vehicle',
-  NUMBERPLATE = '/:numberplate',
+  NUMBERPLATE = '/findVehicleByNumberplate/:numberplate',
   ASSIGN_ALTERNATIVE_DRIVERS = '/assignAlternativeDrivers',
+  VEHICLE_ALTERNATIVE_DRIVERS='/vehicleAlternativeDrivers/:numberplate'
 }
 
 export enum AlternativeDriverRoutes {

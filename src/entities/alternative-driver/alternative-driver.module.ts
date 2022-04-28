@@ -9,5 +9,6 @@ import { AlternativeDriverService } from './alternative-driver.service';
   imports: [Database.features('alternativeDriver',alternativeDriverSchema)],
   controllers: [AlternativeDrivercontroller],
   providers: [AlternativeDriverService, AlternativeDriverRepository],
+  exports:[AlternativeDriverService]
 })
 export class AlternativeDriverModule {}

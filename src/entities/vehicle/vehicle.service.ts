@@ -3,6 +3,7 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
+import { AlternativeDriverService } from '../alternative-driver/alternative-driver.service';
 import { assignAlternativeDriverDto } from './dto/assign-alternative-driver.dto';
 import { createVehicleDto } from './dto/create-vehicle.dto';
 import { IVehicle, VehicleResponse } from './vehicle.model';
@@ -11,7 +12,10 @@ import { VehicleRepository } from './vehicle.repository';
 @Injectable()
 export class VehicleService {
   vehicleResponse: VehicleResponse = new VehicleResponse();
-  constructor(private readonly vehicleRepository: VehicleRepository) {}
+  constructor(
+    private readonly vehicleRepository: VehicleRepository,
+    private readonly alternativeDriverService: AlternativeDriverService,
+  ) {}
 
   async getAllVehicles(): Promise<IVehicle[]> {
     const allVehicles = await this.vehicleRepository.getAllVehicles();
@@ -27,7 +31,7 @@ export class VehicleService {
       const rowVehicle = await this.vehicleRepository.findVehicleByNumberplate(
         numberplate,
       );
-      if(rowVehicle){
+      if (rowVehicle) {
         vehicle = this.vehicleResponse.getVehicle(rowVehicle);
       }
     } catch (error) {
@@ -43,14 +47,29 @@ export class VehicleService {
     return vehicle;
   }
 
+  async findVehicleAlternativeDrivers(numberplate: string) {
+    try {
+      const vehicle = await this.findVehicleByNumberplate(numberplate);
+      const alternativeDrivers =
+        await this.alternativeDriverService.getAllAlternativeDrivers(
+          vehicle.alternativeDrivers,
+        );
+  
+        return alternativeDrivers;     
+    } catch (error) {
+      throw new Error()
+    }
+  }
+
   async assignAlternativeDriver(
     alternativeDrivers: assignAlternativeDriverDto,
   ) {
     try {
       const { alternativeDiversId, numberplate } = alternativeDrivers;
       const vehicle = await this.findVehicleByNumberplate(numberplate);
-
-      if (vehicle.alternativeDrivers.includes(alternativeDiversId)) {
+      // console.log(vehicle?.alternativeDrivers.includes(alternativeDiversId));
+      
+      if (vehicle?.alternativeDrivers?.includes(alternativeDiversId)) {
         throw new BadRequestException(
           `This driver: ${alternativeDiversId} has already assigned`,
         );
