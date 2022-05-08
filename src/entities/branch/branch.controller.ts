@@ -3,11 +3,13 @@ import { BranchRoutes } from '../routes';
 
 @Controller(BranchRoutes.BRANCH)
 export class BranchController {
-  constructor() {}
+  constructor(private readonly branchService: BranchService) {}
   @Get()
-  async getAllUsers() {
+  async getAllBranches(): Promise<IBranch[]> {
+    return await this.branchService.getAllBranches();
   }
   @Post()
-  async createUser(@Body() body) {
+  async createBranch(@Body() createBranchDto: CreateBranchDto): Promise<IBranch> {
+    return await this.branchService.createBranch(createBranchDto);
   }
 }
