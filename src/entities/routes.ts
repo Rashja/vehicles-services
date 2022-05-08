@@ -17,3 +17,7 @@ export enum AlternativeDriverRoutes {
   ALTERNATIVE_DRIVER = 'alternativeDriver',
   LICENSE='/:license'
 }
+
+export enum BranchRoutes {
+  BRANCH='branch'
+}
