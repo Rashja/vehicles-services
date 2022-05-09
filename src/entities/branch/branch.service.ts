@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IBranch } from '../barnch/branch.model';
-import { BranchResponse } from '../branch/branch.model';
+import { IBranch,BranchResponse } from './branch.model';
 import { CreateBranchDto } from './dto/create-branch.dto';
 import { BranchRepository } from './branch.repository';
 

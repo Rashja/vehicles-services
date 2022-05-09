@@ -1,5 +1,6 @@
 import { Body, Controller, Post, Get } from '@nestjs/common';
 import { BranchRoutes } from '../routes';
+import { IBranch } from './branch.model';
 import { BranchService } from './branch.service';
 import { CreateBranchDto } from './dto/create-branch.dto';
 

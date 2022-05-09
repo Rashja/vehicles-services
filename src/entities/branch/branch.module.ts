@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { Database } from 'src/database/database';
 import { BranchController } from './branch.controller';
+import { branchSchema } from './branch.model';
 import { BranchRepository } from './branch.repository';
 import { BranchService } from './branch.service';
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { IBranch } from './branch.model';
 import { CreateBranchDto } from './dto/create-branch.dto';
 
 @Injectable()
