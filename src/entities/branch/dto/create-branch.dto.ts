@@ -1,6 +1,6 @@
 import { IsEmail,IsNotEmpty} from "class-validator";
 
-export class CreateUserDto {
+export class CreateBranchDto {
     @IsNotEmpty()
     name:string;
 
@@ -9,5 +9,8 @@ export class CreateUserDto {
     email:string;
 
     @IsNotEmpty()
-    password:string;
+    address:string;
+
+    @IsNotEmpty()
+    tel:string;
 }

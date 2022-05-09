@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { IBranch } from '../barnch/branch.model';
+import { BranchResponse } from '../branch/branch.model';
 import { CreateBranchDto } from './dto/create-branch.dto';
 import { BranchRepository } from './branch.repository';
-import { BranchResponse } from '../branch/branch.model';
 
 @Injectable()
 export class BranchService {
@@ -33,13 +33,13 @@ export class BranchService {
   async createBranch(
     createBranchDto: CreateBranchDto,
   ) {
-    const branch = await this.branchRepository.findBranchById(
-      createBranchDto.id,
+    const branch = await this.branchRepository.findBranchByEmail(
+      createBranchDto.email,
     );
     
     if (branch) {
       throw new NotFoundException(
-        `This branch: ${createBranchDto.id} does already exist.`,
+        `This branch: ${createBranchDto.email} does already exist.`,
       );
     }
     try {
@@ -50,7 +50,7 @@ export class BranchService {
       return this.branchResponse.getBranch(rowBranch);
     } catch (error) {
       throw new NotFoundException(
-        `Invalid ID : ${createBranchDto.license}`,
+        `Invalid email : ${createBranchDto.email}`,
       );
     }
   }
