@@ -8,6 +8,7 @@ import { AuthModule } from './entities/auth/auth.module';
 import { VehicleModule } from './entities/vehicle/vehicle.module';
 import { AlternativeDriverModule } from './entities/alternative-driver/alternative-driver.module';
 import { BranchModule } from './entities/branch/branch.module';
+import { ServiceModule } from './entities/service/service.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { BranchModule } from './entities/branch/branch.module';
     AlternativeDriverModule,
     VehicleModule,
     BranchModule,
+    ServiceModule,
     Database.root()
   ],
 })

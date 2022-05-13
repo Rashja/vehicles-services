@@ -21,3 +21,7 @@ export enum AlternativeDriverRoutes {
 export enum BranchRoutes {
   BRANCH='branch'
 }
+
+export enum ServiceRoutes {
+  SERVICE='SERVICE'
+}
