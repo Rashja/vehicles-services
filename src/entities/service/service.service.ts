@@ -15,8 +15,8 @@ export class ServService {
     private readonly barnchService: BranchService,
   ) {}
 
-  async getService(): Promise<IService[]> {
-    const allServices = await this.serviceRepository.getServices();
+  async getAllServices(): Promise<IService[]> {
+    const allServices = await this.serviceRepository.getAllServices();
     return allServices.map((service) =>
       this.serviceResponse.getService(service),
     );
