@@ -2,7 +2,7 @@ import { Body, Controller, Post, Get } from '@nestjs/common';
 import { ServiceRoutes } from '../routes';
 import { IService } from './service.model';
 import { ServService } from './service.service';
-import { CreateServiceDto } from './dto/create-service.dto';
+import { createServiceDto } from './dto/create-service.dto';
 
 @Controller(ServiceRoutes.SERVICE)
 export class ServiceController {
