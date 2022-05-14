@@ -6,7 +6,7 @@ export enum Types {
   PAINTING = 'PAINTING',
 }
 
-export class createServiceDto {
+export class CreateServiceDto {
     @IsNotEmpty()
     title:string;
 

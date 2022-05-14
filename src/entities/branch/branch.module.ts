@@ -9,7 +9,8 @@ import { BranchService } from './branch.service';
 @Module({
   imports: [Database.features('branch',branchSchema)],
   controllers: [BranchController],
-  providers:[BranchService,BranchRepository]
+  providers:[BranchService,BranchRepository],
+  exports:[BranchService]
 })
 
 export class BranchModule {}
