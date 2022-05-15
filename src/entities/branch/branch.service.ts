@@ -18,7 +18,10 @@ export class BranchService {
 
     try {
       const rowBranch = await this.branchRepository.findBranchById(id);
-      branch = this.branchResponse.getBranch(rowBranch);
+      
+      if(rowBranch){
+        branch = this.branchResponse.getBranch(rowBranch);
+      }
     } catch (error) {
       throw new NotFoundException(`Not found branch by id "${id}"`);
     }

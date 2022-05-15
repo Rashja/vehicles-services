@@ -29,7 +29,8 @@ export class BranchRepository {
 
   async findBranchById(id: string): Promise<IBranch> {
     try {
-      return this.branchModel.findOne({ id });
+      const branch=await this.branchModel.findOne({ _id:id })
+      return branch;
     } catch (error) {
       throw new Error(error);
     }

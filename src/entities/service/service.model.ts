@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 
 export const serviceSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  type: { type: [String], required: true },
+  type: { type: String, required: true },
   price: { type: String, required: true },
   branchUuid: { type: mongoose.Schema.Types.ObjectId, required: true },
 });

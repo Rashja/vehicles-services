@@ -9,6 +9,6 @@ import { ServService } from './service.service';
 @Module({
   imports: [Database.features('service', serviceSchema), BranchModule],
   controllers: [ServiceController],
-  providers: [ServService,ServiceRepository],
+  providers: [ServService, ServiceRepository],
 })
 export class ServiceModule {}

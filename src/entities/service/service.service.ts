@@ -52,6 +52,7 @@ export class ServService {
       const branch = await this.barnchService.findBranchById(
         createServiceDto.branchUuid,
       );
+      
       if (!branch) {
         throw new NotFoundException(
           `This branch: ${createServiceDto.branchUuid} does not exist.`,
